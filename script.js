@@ -52,19 +52,24 @@ async function updateMyLocation() {
     });
 }
 async function getDistance() {
+    // Make sure we know who is logged in
+    if (!currentUser) {
+        await loadUserName();
+    }
+
     const res = await fetch(`${API_URL}/distance`, {
         credentials: "include"
     });
 
     const data = await res.json();
+    const label = document.getElementById("distanceLabel");
 
-    if (data.milesApart === null) {
-        document.getElementById("distanceLabel").innerText =
-            "Waiting for both locations...";
-    } else {
-        document.getElementById("distanceLabel").innerText =
-            `${data.milesApart} miles apart`;
+    if (!res.ok || data.milesApart === null) {
+        label.innerText = `Waiting for both locations...`;
+        return;
     }
+
+    label.innerText = `${currentUser} is ${data.milesApart} miles apart`;
 }
 function startDistanceUpdates() {
     updateMyLocation();
@@ -158,6 +163,8 @@ function animate() {
 window.addEventListener("load", () => {
     // Only run Globe if we're on distance.html
     if (window.location.pathname.includes("distance.html")) {
+        loadUserName();     // <--- added
         initGlobe();
+        startDistanceUpdates();
     }
 });
