@@ -4,28 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Atlas Friend Finder</title>
+
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- Three.js MUST load first -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 </head>
-    <body>
+<body>
 
-        <div class="frame">
-            <h1 class="title">ATLAS FRIEND FINDER</h1>
-            
-            <div class="globe-area">
-                <img src="assets/bunny.gif" class="creature left" />
-                <div id="globeContainer" class="globe-3d fade-in"></div>
-                <img src="assets/cat.gif" class="creature right" />
-            </div>
+<div class="frame">
+    <h1 class="title">ATLAS FRIEND FINDER</h1>
 
-            <div class="distance-text">
-                <span id="distanceLabel">Loading...</span>
-            </div>
-        </div>
-        <script src="script.js"></script>
-        <script>
-            startDistanceUpdates();
-        </script>
+    <div class="globe-area">
+        <img src="assets/bunny.gif" class="creature left fade-in" />
 
-    </body>
+        <div id="globeContainer" class="globe-3d fade-in"></div>
+
+        <img src="assets/cat.gif" class="creature right fade-in" />
+    </div>
+
+    <div class="distance-text fade-in">
+        <span id="distanceLabel">Loading...</span>
+    </div>
+</div>
+
+<!-- Your logic AFTER Three.js -->
+<script src="script.js"></script>
+
+<script>
+    startDistanceUpdates();
+</script>
+
+</body>
 </html>

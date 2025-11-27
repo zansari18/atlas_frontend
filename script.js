@@ -1,7 +1,7 @@
 // -----------------------------------------------------
 //  Cute 3D Cartoon Earth Globe for Atlas Friend Finder
 // -----------------------------------------------------
-
+console.log("Script JS loaded")
 let scene, camera, renderer, earth;
 
 function initGlobe() {
