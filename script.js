@@ -1,6 +1,7 @@
 // -----------------------------------------------------
 //  Cute 3D Cartoon Earth Globe for Atlas Friend Finder
 // -----------------------------------------------------
+const API_URL = "https://atlas-production-8939.up.railway.app";
 console.log("Script JS loaded")
 console.log("THREE exists?", typeof THREE);
 let scene, camera, renderer, earth;
