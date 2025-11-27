@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atlas Friend Finder</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="frame">
+    <h1 class="title">ATLAS FRIEND FINDER</h1>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+    <div class="globe-area">
+        <img src="assets/bunny.gif" class="creature left" />
+        <div id="globeContainer" class="globe-3d fade-in"></div>
+        <img src="assets/cat.gif" class="creature right" />
+    </div>
+
+    <div class="distance-text">
+        <span id="distanceLabel">Loading...</span>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    startDistanceUpdates();
+</script>
+
+</body>
+</html>

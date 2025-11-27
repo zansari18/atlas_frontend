@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #f9f7fb;
+    font-family: "Comic Sans MS", "Arial Rounded MT Bold", sans-serif;
+}
+
+.frame {
+    margin: auto;
+    margin-top: 20px;
+    width: 90%;
+    max-width: 420px;
+    padding: 20px;
+    border: 8px solid #b57bff;
+    border-radius: 25px;
+    background: white;
+}
+
+.title {
+    text-align: center;
+    color: #8BAF64;
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.login-box {
+    text-align: center;
+}
+
+.input {
+    display: block;
+    width: 80%;
+    margin: 12px auto;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #ffc6c6;
+    font-size: 16px;
+}
+
+.login-btn {
+    margin-top: 10px;
+    padding: 12px 30px;
+    border-radius: 12px;
+    border: none;
+    background: #9ccf82;
+    color: white;
+    font-size: 18px;
+}
+
+.globe-area {
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.creature {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70px;
+}
+
+.left {
+    left: 10px;
+}
+
+.right {
+    right: 10px;
+}
+
+.distance-text {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 22px;
+    color: #7a50c4;
+}
+.globe-3d {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+/* Fade-in animation */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
