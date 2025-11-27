@@ -33,6 +33,11 @@ async function login() {
         alert(data.error || "Login failed");
     }
 }
+
+// -----------------------------------------------------
+// LOCATION + DISTANCE
+// -----------------------------------------------------
+
 async function updateMyLocation() {
     if (!navigator.geolocation) {
         console.error("Geolocation not supported");
@@ -51,12 +56,8 @@ async function updateMyLocation() {
         });
     });
 }
-async function getDistance() {
-    // Make sure we know who is logged in
-    if (!currentUser) {
-        await loadUserName();
-    }
 
+async function getDistance() {
     const res = await fetch(`${API_URL}/distance`, {
         credentials: "include"
     });
@@ -65,12 +66,13 @@ async function getDistance() {
     const label = document.getElementById("distanceLabel");
 
     if (!res.ok || data.milesApart === null) {
-        label.innerText = `Waiting for both locations...`;
+        label.innerText = "Waiting for both locations...";
         return;
     }
 
-    label.innerText = `${currentUser} is ${data.milesApart} miles apart`;
+    label.innerText = `${data.milesApart} miles apart`;
 }
+
 function startDistanceUpdates() {
     updateMyLocation();
     getDistance();
@@ -83,6 +85,7 @@ function startDistanceUpdates() {
 // -----------------------------------------------------
 // 3D GLOBE CODE (ONLY RUNS ON DISTANCE PAGE)
 // -----------------------------------------------------
+
 let scene, camera, renderer, earth;
 
 function initGlobe() {
@@ -99,10 +102,8 @@ function initGlobe() {
         return;
     }
 
-    // Scene
     scene = new THREE.Scene();
 
-    // Camera
     camera = new THREE.PerspectiveCamera(
         45,
         container.clientWidth / container.clientHeight,
@@ -111,7 +112,6 @@ function initGlobe() {
     );
     camera.position.z = 3.5;
 
-    // Renderer
     renderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: true
@@ -119,7 +119,6 @@ function initGlobe() {
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
-    // Lights
     const mainLight = new THREE.DirectionalLight(0xffffff, 0.9);
     mainLight.position.set(3, 2, 5);
     scene.add(mainLight);
@@ -127,24 +126,19 @@ function initGlobe() {
     const ambient = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambient);
 
-    // Globe Geometry
     const geometry = new THREE.SphereGeometry(1.3, 64, 64);
-
-    // Texture
     const texture = new THREE.TextureLoader().load("assets/cartoon_earth.png");
 
     const material = new THREE.MeshStandardMaterial({
         map: texture,
     });
 
-    // Create Earth
     earth = new THREE.Mesh(geometry, material);
     scene.add(earth);
 
     animate();
 }
 
-// Animation loop
 function animate() {
     requestAnimationFrame(animate);
 
@@ -158,12 +152,10 @@ function animate() {
 }
 
 // -----------------------------------------------------
-// INIT — runs on every page
+// PAGE INIT
 // -----------------------------------------------------
 window.addEventListener("load", () => {
-    // Only run Globe if we're on distance.html
     if (window.location.pathname.includes("distance.html")) {
-        loadUserName();     // <--- added
         initGlobe();
         startDistanceUpdates();
     }
