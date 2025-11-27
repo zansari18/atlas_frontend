@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: #f9f7fb;
+    background: #9D75CB;
     font-family: "Comic Sans MS", "Arial Rounded MT Bold", sans-serif;
 }
 
@@ -11,9 +11,9 @@ body {
     width: 90%;
     max-width: 420px;
     padding: 20px;
-    border: 8px solid #b57bff;
     border-radius: 25px;
     background: white;
+    box-shadow: 0px 8px 20px rgba(181, 123, 255, 0.4);
 }
 
 .title {
