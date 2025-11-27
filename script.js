@@ -6,6 +6,23 @@ const API_URL = "https://atlas-production-8939.up.railway.app";
 
 console.log("script.js loaded");
 
+let currentUser = null;
+
+async function loadUserName() {
+    try {
+        const res = await fetch(`${API_URL}/me`, {
+            credentials: "include"
+        });
+
+        if (!res.ok) return;
+
+        const data = await res.json();
+        currentUser = data.username;
+    } catch (err) {
+        console.error("Could not load username:", err);
+    }
+}
+
 // -----------------------------------------------------
 // LOGIN FUNCTION
 // -----------------------------------------------------
@@ -58,6 +75,12 @@ async function updateMyLocation() {
 }
 
 async function getDistance() {
+
+    // Load username the FIRST time distance runs
+    if (!currentUser) {
+        await loadUserName();
+    }
+
     const res = await fetch(`${API_URL}/distance`, {
         credentials: "include"
     });
@@ -70,7 +93,14 @@ async function getDistance() {
         return;
     }
 
-    label.innerText = `${data.milesApart} miles apart`;
+    // Fallback if username somehow fails to load
+    if (!currentUser) {
+        label.innerText = `${data.milesApart} miles apart`;
+        return;
+    }
+
+    // The final pretty version:
+    label.innerText = `${currentUser} is ${data.milesApart} miles apart from her bestie <3`;
 }
 
 function startDistanceUpdates() {
