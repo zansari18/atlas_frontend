@@ -33,6 +33,47 @@ async function login() {
         alert(data.error || "Login failed");
     }
 }
+async function updateMyLocation() {
+    if (!navigator.geolocation) {
+        console.error("Geolocation not supported");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+
+        await fetch(`${API_URL}/updateLocation`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ latitude: lat, longitude: lon })
+        });
+    });
+}
+async function getDistance() {
+    const res = await fetch(`${API_URL}/distance`, {
+        credentials: "include"
+    });
+
+    const data = await res.json();
+
+    if (data.milesApart === null) {
+        document.getElementById("distanceLabel").innerText =
+            "Waiting for both locations...";
+    } else {
+        document.getElementById("distanceLabel").innerText =
+            `${data.milesApart} miles apart`;
+    }
+}
+function startDistanceUpdates() {
+    updateMyLocation();
+    getDistance();
+    setInterval(() => {
+        updateMyLocation();
+        getDistance();
+    }, 5000);
+}
 
 // -----------------------------------------------------
 // 3D GLOBE CODE (ONLY RUNS ON DISTANCE PAGE)
