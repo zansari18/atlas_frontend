@@ -1,4 +1,8 @@
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     background: #9D75CB;
@@ -14,6 +18,7 @@ body {
     border-radius: 25px;
     background: white;
     box-shadow: 0px 8px 20px rgba(181, 123, 255, 0.4);
+    min-height: 700px;
 }
 
 .title {
@@ -58,7 +63,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 70px;
+    width: 22vw;
 }
 
 .left {
